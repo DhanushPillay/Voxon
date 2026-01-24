@@ -1,105 +1,102 @@
-<<<<<<< HEAD
-# 🎤 Voxon - Voice AI Assistant
+# 🎤 Voxon - AI Voice Assistant
 
-Voxon is a browser-based voice assistant that combines OpenAI's GPT models with Google Search and system commands. It features a modern, responsive UI with a real-time audio visualizer and persistent chat history.
-
-![Voxon UI](https://via.placeholder.com/800x400?text=Voxon+UI+Preview)
+Voxon is a Jarvis-like voice assistant powered by OpenAI GPT and Google Search. It features voice commands, YouTube/Spotify playback, web search, and a modern UI with real-time audio visualization.
 
 ## ✨ Features
 
-- **🗣️ Voice Interaction**: Full Speech-to-Text (STT) and Text-to-Speech (TTS) capabilities.
-- **🧠 AI Intelligence**: Powered by OpenAI's GPT-4o-mini for smart, conversational responses.
-- **📊 Audio Visualizer**: Real-time frequency visualization that reacts to your voice.
-- **🌐 Web Integration**:
-  - **Google Search**: Ask for "weather", "news", or "today" to get live results.
-  - **Site Navigation**: Say "Open YouTube", "Open Google", or any other site.
-  - **YouTube Playback**: Say "Play [song name] on YouTube" to instantly search and open videos.
-- **💾 Smart History**: Chat history is saved locally, so you never lose your conversation context.
-- **🎨 Modern UI**: Beautiful gradient background, glass-morphism effects, and responsive design for mobile and desktop.
+### 🗣️ Voice & Chat
+- **Speech-to-Text**: Talk to Voxon using your microphone
+- **Text-to-Speech**: Voxon speaks responses back to you
+- **AI Chat**: Powered by GPT-4o-mini for intelligent conversations
 
-## 🚀 How to Run
+### 🎵 Media Commands
+| Command | Action |
+|---------|--------|
+| `Play [song]` | Search & play on YouTube |
+| `Play [song] on Spotify` | Search & play on Spotify |
+| `Play [song] on YouTube` | Explicit YouTube playback |
+| `Open [channel] channel` | Open YouTube channel |
+| `Search [query] on YouTube` | Search YouTube |
 
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/DhanushPillay/Voxon.git
-    ```
-2.  **Configure API Keys**:
-    *   Open `Voxon.html` in a text editor.
-    *   Locate the `assistantConfig` object at the bottom of the script.
-    *   Insert your **OpenAI API Key** and **Google Custom Search API Key**.
-    ```javascript
-    const assistantConfig = {
-      language: "en-US",
-      openAIKey: "YOUR_OPENAI_KEY_HERE",
-      googleApiKey: "YOUR_GOOGLE_API_KEY_HERE",
-      // ...
-    };
-    ```
-3.  **Launch**:
-    *   Simply double-click `Voxon.html` to open it in your web browser (Chrome/Edge recommended for best Speech Recognition support).
+### 🌐 Web Commands
+| Command | Action |
+|---------|--------|
+| `Open [website]` | Opens any website |
+| `What's the weather?` | Live weather search |
+| `Today's news` | Fetches latest news |
+| `Reload` / `Refresh` | Reloads the page |
 
-## 🛠️ Tech Stack
+### 🎨 UI Features
+- Real-time audio visualizer
+- Dark/Light theme toggle
+- Persistent chat history
+- Glass-morphism modern design
 
-*   **Frontend**: HTML5, CSS3 (Animations, Flexbox), JavaScript (ES6+)
-*   **APIs**:
-    *   Web Speech API (Recognition & Synthesis)
-    *   Web Audio API (Visualizer)
-    *   OpenAI API
-    *   Google Custom Search JSON API
+## 🚀 Quick Start
 
-## 📝 License
+### 1. Clone & Install
+```bash
+git clone https://github.com/DhanushPillay/Voxon.git
+cd Voxon/server
+npm install
+```
 
-This project is open source and available under the [MIT License](LICENSE).
-=======
-# 🎤 Voxon - Voice AI Assistant
+### 2. Configure API Keys
+Create `server/.env` with your keys:
+```env
+OPENAI_API_KEY=your_openai_api_key
+GOOGLE_API_KEY=your_google_api_key
+GOOGLE_CSE_ID=your_google_cse_id
+```
 
-Voxon is a browser-based voice assistant that combines OpenAI's GPT models with Google Search and system commands. It features a modern, responsive UI with a real-time audio visualizer and persistent chat history.
+### 3. Start the Server
+```bash
+cd server
+npm start
+```
 
-![Voxon UI](https://via.placeholder.com/800x400?text=Voxon+UI+Preview)
+### 4. Open in Browser
+Navigate to **http://localhost:3000** (Chrome/Edge recommended)
 
-## ✨ Features
+## � Project Structure
 
-- **🗣️ Voice Interaction**: Full Speech-to-Text (STT) and Text-to-Speech (TTS) capabilities.
-- **🧠 AI Intelligence**: Powered by OpenAI's GPT-4o-mini for smart, conversational responses.
-- **📊 Audio Visualizer**: Real-time frequency visualization that reacts to your voice.
-- **🌐 Web Integration**:
-  - **Google Search**: Ask for "weather", "news", or "today" to get live results.
-  - **Site Navigation**: Say "Open YouTube", "Open Google", or any other site.
-  - **YouTube Playback**: Say "Play [song name] on YouTube" to instantly search and open videos.
-- **💾 Smart History**: Chat history is saved locally, so you never lose your conversation context.
-- **🎨 Modern UI**: Beautiful gradient background, glass-morphism effects, and responsive design for mobile and desktop.
-
-## 🚀 How to Run
-
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/DhanushPillay/Voxon.git
-    ```
-2.  **Configure API Keys**:
-    *   Open `Voxon.html` in a text editor.
-    *   Locate the `assistantConfig` object at the bottom of the script.
-    *   Insert your **OpenAI API Key** and **Google Custom Search API Key**.
-    ```javascript
-    const assistantConfig = {
-      language: "en-US",
-      openAIKey: "YOUR_OPENAI_KEY_HERE",
-      googleApiKey: "YOUR_GOOGLE_API_KEY_HERE",
-      // ...
-    };
-    ```
-3.  **Launch**:
-    *   Simply double-click `Voxon.html` to open it in your web browser (Chrome/Edge recommended for best Speech Recognition support).
+```
+Voxon/
+├── index.html              # Main entry point
+├── src/
+│   ├── js/
+│   │   └── app.js          # Main application logic
+│   └── css/
+│       └── styles.css      # Stylesheets
+├── server/
+│   ├── index.js            # Express API proxy server
+│   ├── package.json        # Server dependencies
+│   └── .env                # API keys (not in git)
+├── docs/
+│   └── SECURITY.md         # Security documentation
+├── .env.example            # API key template
+└── README.md
+```
 
 ## 🛠️ Tech Stack
 
-*   **Frontend**: HTML5, CSS3 (Animations, Flexbox), JavaScript (ES6+)
-*   **APIs**:
-    *   Web Speech API (Recognition & Synthesis)
-    *   Web Audio API (Visualizer)
-    *   OpenAI API
-    *   Google Custom Search JSON API
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | HTML5, CSS3, JavaScript ES6+ |
+| **Backend** | Node.js, Express |
+| **APIs** | OpenAI GPT-4o-mini, Google Custom Search |
+| **Browser APIs** | Web Speech, Web Audio |
+
+## 🔒 Security
+
+API keys are stored securely on the backend server. The frontend never has access to your keys.
+
+See [docs/SECURITY.md](docs/SECURITY.md) for detailed security information.
 
 ## 📝 License
 
-This project is open source and available under the [MIT License](LICENSE).
->>>>>>> 8b3af90ae12a9696f9e2f7edcbf614179bd7924a
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+Made with ❤️ by [Dhanush Pillay](https://github.com/DhanushPillay)
