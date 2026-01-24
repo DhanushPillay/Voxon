@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voxon - AI Voice Assistant</title>
+  <meta name="description"
+    content="Voxon is an intelligent voice assistant with AI-powered responses, web search, and voice commands.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="header">
+    <h1>🎤 Voxon</h1>
+    <div class="header-controls">
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+        <span id="themeIcon">🌙</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="listenBtn" onclick="startListening()">🎤 Talk</button>
+    <button onclick="stopSpeech()">🔇 Stop Speech</button>
+  </div>
+
+  <canvas id="visualizer" width="800" height="80"></canvas>
+
+  <form id="textForm" onsubmit="handleTextInput(event)">
+    <input type="text" id="textInput" placeholder="Type your question or command here..." autocomplete="off" />
+    <button type="submit">Send</button>
+  </form>
+
+  <div class="box">
+    <strong>You said:</strong>
+    <p id="userText">...</p>
+  </div>
+
+  <div class="box">
+    <strong>Assistant:</strong>
+    <p id="assistantResponse">...</p>
+    <span id="typingIndicator">Assistant is typing...</span>
+  </div>
+
+  <div id="chatHistory">
+    <strong>Chat History:</strong>
+    <div id="historyEntries"></div>
+    <button id="clearAllBtn" onclick="clearAllHistory()">Clear All</button>
+  </div>
+
+  <p class="status" id="status">Ready to listen</p>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
