@@ -1,17 +1,11 @@
 // Voxon - AI Voice Assistant Script
 
 // Assistant configuration
-// IMPORTANT: API keys should be loaded from environment variables
-// See .env.example for setup instructions
 const assistantConfig = {
   language: "en-US",
-  // For security, these should be loaded from a backend or build-time environment variables
-  // NEVER hardcode API keys in client-side code
-  openAIKey: "", // Load from environment or backend
-  googleApiKey: "", // Load from environment or backend
-  googleCSEId: "", // Load from environment or backend
-  openAIURL: "https://api.openai.com/v1/chat/completions",
-  googleURL: "https://www.googleapis.com/customsearch/v1"
+  // Backend API endpoints (no API keys needed on frontend)
+  chatAPI: "/api/chat",
+  searchAPI: "/api/search"
 };
 
 // State variables
@@ -297,31 +291,28 @@ async function getAIResponse(question) {
   updateStatus("Getting AI response...");
 
   try {
-    const res = await fetch(assistantConfig.openAIURL, {
+    const res = await fetch(assistantConfig.chatAPI, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${assistantConfig.openAIKey}`
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: question }]
-      })
+      body: JSON.stringify({ message: question })
     });
 
     if (!res.ok) {
-      throw new Error(`API error: ${res.status}`);
+      const errorData = await res.json();
+      throw new Error(errorData.error || `API error: ${res.status}`);
     }
 
     const data = await res.json();
-    const reply = data.choices[0].message.content;
+    const reply = data.reply;
     document.getElementById("assistantResponse").textContent = reply;
     speak(reply);
     addToChatHistory(question, reply);
     updateStatus("Response received");
   } catch (error) {
     console.error("AI response error:", error);
-    document.getElementById("assistantResponse").textContent = "Error fetching AI response. Please check console for details.";
+    document.getElementById("assistantResponse").textContent = `Error: ${error.message}`;
     addToChatHistory(question, "Error fetching AI response.");
     updateStatus("Error getting response");
   }
@@ -336,11 +327,11 @@ async function getLiveSearchResponse(query) {
   updateStatus("Searching web...");
 
   try {
-    const url = `${assistantConfig.googleURL}?key=${assistantConfig.googleApiKey}&cx=${assistantConfig.googleCSEId}&q=${encodeURIComponent(query)}`;
-    const res = await fetch(url);
+    const res = await fetch(`${assistantConfig.searchAPI}?q=${encodeURIComponent(query)}`);
 
     if (!res.ok) {
-      throw new Error(`Google API error: ${res.status}`);
+      const errorData = await res.json();
+      throw new Error(errorData.error || `API error: ${res.status}`);
     }
 
     const data = await res.json();
@@ -360,7 +351,7 @@ async function getLiveSearchResponse(query) {
     }
   } catch (error) {
     console.error("Search error:", error);
-    document.getElementById("assistantResponse").textContent = "Error fetching live search. Please check console for details.";
+    document.getElementById("assistantResponse").textContent = `Error: ${error.message}`;
     addToChatHistory(query, "Error fetching live search.");
     updateStatus("Error searching");
   }

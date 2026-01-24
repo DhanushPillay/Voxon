@@ -2,6 +2,7 @@
 .env
 .env.local
 .env.*.local
+server/.env
 
 # Node modules (if you add a backend later)
 node_modules/
