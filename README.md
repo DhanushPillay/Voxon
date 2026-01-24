@@ -1,6 +1,6 @@
 # 🎤 Voxon - AI Voice Assistant
 
-Voxon is a Jarvis-like voice assistant powered by OpenAI GPT and Google Search. It features voice commands, YouTube/Spotify playback, web search, and a modern UI with real-time audio visualization.
+Voxon is an intelligent voice assistant powered by OpenAI GPT and Google Search. It features voice commands, YouTube/Spotify playback, web search, and a modern UI with real-time audio visualization.
 
 ## ✨ Features
 
