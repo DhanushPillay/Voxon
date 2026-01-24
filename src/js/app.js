@@ -114,10 +114,66 @@ function processInput(transcript) {
     return;
   }
 
-  // Play song/video on YouTube
-  const playMatch = transcript.match(/play (.+) on youtube/i);
-  if (playMatch) {
-    const query = playMatch[1].trim();
+  // Play song/video on YouTube (explicit)
+  const playYoutubeMatch = transcript.match(/play (.+) on youtube/i);
+  if (playYoutubeMatch) {
+    const query = playYoutubeMatch[1].trim();
+    const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+    document.getElementById("assistantResponse").textContent = `Playing "${query}" on YouTube...`;
+    speak(`Playing ${query} on YouTube`);
+    addToChatHistory(transcript, `Playing "${query}" on YouTube...`);
+    setTimeout(() => {
+      window.open(url, "_blank");
+    }, 1200);
+    return;
+  }
+
+  // Open YouTube channel
+  const youtubeChannelMatch = transcript.match(/open (.+) (?:channel|youtube channel)/i);
+  if (youtubeChannelMatch) {
+    const channel = youtubeChannelMatch[1].trim();
+    const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(channel + " channel")}`;
+    document.getElementById("assistantResponse").textContent = `Opening ${channel} channel on YouTube...`;
+    speak(`Opening ${channel} channel on YouTube`);
+    addToChatHistory(transcript, `Opening ${channel} channel on YouTube...`);
+    setTimeout(() => {
+      window.open(url, "_blank");
+    }, 1200);
+    return;
+  }
+
+  // Search on YouTube
+  const searchYoutubeMatch = transcript.match(/search (.+) on youtube/i);
+  if (searchYoutubeMatch) {
+    const query = searchYoutubeMatch[1].trim();
+    const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+    document.getElementById("assistantResponse").textContent = `Searching "${query}" on YouTube...`;
+    speak(`Searching ${query} on YouTube`);
+    addToChatHistory(transcript, `Searching "${query}" on YouTube...`);
+    setTimeout(() => {
+      window.open(url, "_blank");
+    }, 1200);
+    return;
+  }
+
+  // Play song on Spotify
+  const spotifyMatch = transcript.match(/play (.+) on spotify/i);
+  if (spotifyMatch) {
+    const query = spotifyMatch[1].trim();
+    const url = `https://open.spotify.com/search/${encodeURIComponent(query)}`;
+    document.getElementById("assistantResponse").textContent = `Playing "${query}" on Spotify...`;
+    speak(`Playing ${query} on Spotify`);
+    addToChatHistory(transcript, `Playing "${query}" on Spotify...`);
+    setTimeout(() => {
+      window.open(url, "_blank");
+    }, 1200);
+    return;
+  }
+
+  // Generic play command (defaults to YouTube)
+  const genericPlayMatch = transcript.match(/^play (.+)$/i);
+  if (genericPlayMatch) {
+    const query = genericPlayMatch[1].trim();
     const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
     document.getElementById("assistantResponse").textContent = `Playing "${query}" on YouTube...`;
     speak(`Playing ${query} on YouTube`);
