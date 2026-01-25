@@ -72,8 +72,7 @@ Voxon/
 │   ├── index.js            # Express API proxy server
 │   ├── package.json        # Server dependencies
 │   └── .env                # API keys (not in git)
-├── docs/
-│   └── SECURITY.md         # Security documentation
+
 ├── .env.example            # API key template
 └── README.md
 ```
@@ -91,7 +90,7 @@ Voxon/
 
 API keys are stored securely on the backend server. The frontend never has access to your keys.
 
-See [docs/SECURITY.md](docs/SECURITY.md) for detailed security information.
+
 
 ## 📝 License
 
